@@ -1,1 +1,5 @@
 .DS_Store
+.ipynb_checkpoints/
+steinmetz_part0.npz
+steinmetz_part1.npz
+steinmetz_part2.npz
