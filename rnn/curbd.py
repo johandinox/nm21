@@ -119,14 +119,6 @@ def trainMultiRegionRNN(activity, dtData=1, dtFactor=1, g=1.5, tauRNN=0.01,
     # initialize learning update matrix (see Sussillo and Abbot, 2009)
     PJ = P0*np.eye(number_learn)
 
-    if plotStatus is True:
-        plt.rcParams.update({'font.size': 6})
-        fig = plt.figure()
-        fig.tight_layout()
-        fig.subplots_adjust(hspace=0.4, wspace=0.4)
-        gs = GridSpec(nrows=2, ncols=4)
-    else:
-        fig = None
 
     # start training
     # loop along training runs
@@ -176,8 +168,16 @@ def trainMultiRegionRNN(activity, dtData=1, dtFactor=1, g=1.5, tauRNN=0.01,
         chi2s.append(chi2)
         if verbose:
             print('trial=%d pVar=%f chi2=%f' % (nRun, pVar, chi2))
-        if fig:
-            fig.clear()
+
+        plotsteps = np.linspace(0,nRunTot,5).astype(int)
+        if plotStatus and nRun in plotsteps:
+
+            plt.rcParams.update({'font.size': 6})
+            fig = plt.figure()
+            fig.tight_layout()
+            fig.subplots_adjust(hspace=0.4, wspace=0.4)
+            gs = GridSpec(nrows=2, ncols=4)
+
             ax = fig.add_subplot(gs[0, 0])
             ax.axis('off')
             ax.imshow(Adata[iTarget, :])
@@ -201,8 +201,7 @@ def trainMultiRegionRNN(activity, dtData=1, dtFactor=1, g=1.5, tauRNN=0.01,
             ax.plot(tRNN, RNN[iTarget[idx], :])
             ax.plot(tData, Adata[iTarget[idx], :])
             ax.set_title(nRun)
-            fig.show()
-            plt.pause(0.05)
+            fig.savefig(f"Training_step{nRun}.png",dpi=200)
 
     out_params = {}
     out_params['dtFactor'] = dtFactor
