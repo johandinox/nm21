@@ -138,7 +138,7 @@ def trainMultiRegionRNN(activity, dtData=1, dtFactor=1, g=1.5, tauRNN=0.01,
             # be used, but it's an option for concatenating multi-trial data
             if tt in resetPoints:
                 timepoint = math.floor(tt / dtFactor)
-                H = Adata[:, timepoint]
+                H = Adata[:, timepoint, np.newaxis]
             # compute next RNN step
             RNN[:, tt, np.newaxis] = nonLinearity(H)
             JR = (J.dot(RNN[:, tt]).reshape((number_units, 1)) +
