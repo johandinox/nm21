@@ -1,6 +1,10 @@
 from sklearn.decomposition import PCA 
 import scipy
 import seaborn as sns;
+import numpy as np
+from matplotlib import rcParams 
+from matplotlib import pyplot as plt
+from matplotlib import patches 
 
 def conactinate_nth_items(startlist):
     concatinated_column_vectors = []
