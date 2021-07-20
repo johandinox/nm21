@@ -99,7 +99,8 @@ def trainMultiRegionRNN(activity, dtData=1, dtFactor=1, g=1.5, tauRNN=0.01,
 
     # set up target training data
     Adata = activity.copy()
-    Adata = Adata/Adata.max()
+    data_max = Adata.max()
+    Adata = Adata/data_max
     Adata = np.minimum(Adata, 0.999)
     Adata = np.maximum(Adata, -0.999)
 
@@ -234,6 +235,7 @@ def trainMultiRegionRNN(activity, dtData=1, dtFactor=1, g=1.5, tauRNN=0.01,
     out['iTarget'] = iTarget
     out['iNonTarget'] = iNonTarget
     out['params'] = out_params
+    out['data_max'] = data_max
     return out
 
 
