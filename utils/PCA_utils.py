@@ -1,3 +1,7 @@
+from sklearn.decomposition import PCA 
+import scipy
+import seaborn as sns;
+
 def conactinate_nth_items(startlist):
     concatinated_column_vectors = []
     for c in range(len(max(startlist, key=len))):
@@ -11,9 +15,6 @@ def conactinate_nth_items(startlist):
 #### plot average activity (across trials) heatmap for each region
 
 def plot_zscored_activity_heatmap(rfilt_activity,input_regions,region):
-    import scipy
-    import seaborn as sns;
-
     mean_activity_all = []
     for unit in range(len(rfilt_activity[region])):
         start = -250
@@ -72,7 +73,6 @@ def plot_pca_varexp_outcome(pca):
     print('80% var explained by ' + str(zoom_in) + ' components')
 
 def PCA_all_trials(rfilt_activity,components = 5):
-    from sklearn.decomposition import PCA 
     mean_sbtrct = rfilt_activity - np.mean(rfilt_activity, axis=1)[:, np.newaxis]
     model = PCA(n_components = components).fit(mean_sbtrct.T)
     W = model.components_
