@@ -242,7 +242,7 @@ def trainMultiRegionRNN(activity, dtData=1, dtFactor=1, g=1.5, tauRNN=0.01,
     out['iNonTarget'] = iNonTarget
     out['params'] = out_params
     out['data_max'] = data_max
-    out['data_mean'] = data_mean
+    out['data_min'] = data_min
     return out
 
 
